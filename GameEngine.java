@@ -41,6 +41,5 @@ public class GameEngine implements Engine, KeyListener, Observer {
         // method called when the subject not observers
         System.out.println("GameEngine detected hero moved.");
         System.out.println("New hero position = (" + hero.getX() + ", " + hero.getY() + ")");
-            // can implement logic such as "check hero triggers a door" or "spawning enemies",
     }
 }
