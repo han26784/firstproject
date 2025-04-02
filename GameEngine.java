@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 
 // for keyboard inputs
-public class GameEngine implements Engine, KeyListener {
+public class GameEngine implements Engine, KeyListener, Observer {
     private final DynamicSprite hero;
 
     public GameEngine(DynamicSprite hero) {
@@ -11,10 +11,10 @@ public class GameEngine implements Engine, KeyListener {
         this.hero = hero;
     }
 
-    @Override
-    public void update() {
+    // @Override
+    // public void update() {
 
-    }
+    // }
 
     @Override
     public void keyPressed(KeyEvent e) { //the direction the hero goes
@@ -32,5 +32,15 @@ public class GameEngine implements Engine, KeyListener {
     } 
     public void keyTyped(KeyEvent e) {
 
+    }
+
+    // the observer interface methods
+
+    @Override
+    public void update() {
+        // method called when the subject not observers
+        System.out.println("GameEngine detected hero moved.");
+        System.out.println("New hero position = (" + hero.getX() + ", " + hero.getY() + ")");
+            // can implement logic such as "check hero triggers a door" or "spawning enemies",
     }
 }
