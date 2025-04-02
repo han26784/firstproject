@@ -1,11 +1,13 @@
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 // hardest challenge 
 //most comp one so far
 // implements moving characters 
-public class DynamicSprite extends SolidSprite {
+public class DynamicSprite extends SolidSprite implements Observable {
 
 
     private boolean isWalking = true;
@@ -17,6 +19,10 @@ public class DynamicSprite extends SolidSprite {
     private int timeBetweenFrame = 200;
 
     private Direction direction = Direction.NORTH;
+
+    // The observer patterns fields 
+
+    private List<Observer> observers = new ArrayList<>();
 
 
     public DynamicSprite(double x, double y, Image image, double width,
@@ -90,6 +96,27 @@ public class DynamicSprite extends SolidSprite {
                 case SOUTH -> y += speed;
                 case WEST -> x -= speed;
                 case EAST -> x += speed;
+            }
+            System.out.println("hero moved !");
+            notifyObserver(); // notify after movement (obs pattern)
+        }
+
+        // the observer pattern implementations 
+
+        @Override
+        public void addObserver(Observer observer) {
+            observers.add(observer);
+        }
+
+        @Override
+        public void removeObserver(Observer observer) {
+            observers.remove(observer);
+        }
+        
+        @Override
+        public void notifyObserver() {
+            for (Observer obs : observers) {
+                obs.update();
             }
         }
 
